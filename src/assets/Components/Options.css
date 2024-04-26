@@ -1,0 +1,8 @@
+.list-group-item-success[disabled] {
+  background-color: #198754;
+  color: aliceblue;
+}
+.list-group-item-danger[disabled] {
+  background-color: #dc3545;
+  color: bisque;
+}
