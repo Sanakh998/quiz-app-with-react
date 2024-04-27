@@ -17,10 +17,9 @@ function App() {
     wrongAnswers: 0,
   });
 
-  const { questions, topic, level, totalQuestions, scorePerQuestion } = quiz;
+  const { questions } = quiz;
   const { question, options, correctAnswer } = questions[activeQuestion];
 
-  
   const checkAnswer = (ans, index) => {
     setSelectedAnswerIndex(index);
     if (ans === correctAnswer) {
@@ -29,10 +28,8 @@ function App() {
       setSelectedAnswer(false);
     }
   };
-  
-  const handleNext = () => {
-    setSelectedAnswerIndex(null);
-    setActiveQuestion((prev) => prev + 1);
+
+  const updateResult = () => {
     setResult((prev) => {
       return selectedAnswer
         ? {
@@ -47,20 +44,15 @@ function App() {
     });
   };
 
+  const handleNext = () => {
+    setSelectedAnswerIndex(null);
+    setActiveQuestion((prev) => prev + 1);
+    updateResult();
+  };
+
   const finishTest = () => {
     setIsCompleted(true);
-    setResult((prev) => {
-      return selectedAnswer
-        ? {
-            ...prev,
-            score: prev.score + 5,
-            correctAnswers: prev.correctAnswers + 1,
-          }
-        : {
-            ...prev,
-            wrongAnswers: prev.wrongAnswers + 1,
-          };
-    });
+    updateResult();
   };
 
   const restartTest = () => {
@@ -73,23 +65,13 @@ function App() {
       setIsCompleted(false);
     setSelectedAnswerIndex(null);
   };
-  
+
   return (
     <div className="container d-flex flex-column">
-      <Header
-        topic={topic}
-        level={level}
-        scorePerQuestion={scorePerQuestion}
-        totalQuestions={totalQuestions}
-      />
+      <Header />
       <ScoreBar result={result} />
       {isCompleted ? (
-        <Result
-          result={result}
-          totalQuestions={totalQuestions}
-          scorePerQuestion={scorePerQuestion}
-          restartTest={restartTest}
-        />
+        <Result result={result} restartTest={restartTest} />
       ) : (
         <Main
           correctAnswer={correctAnswer}

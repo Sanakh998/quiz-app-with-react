@@ -1,4 +1,5 @@
 .container {
-  width: 500px;
+  max-width: 500px;
+  min-width: 270px;
   font-family: "Poppins", sans-serif;
 }

@@ -3,7 +3,7 @@ import React from "react";
 const ScoreBar = (props) => {
   return (
     <div className="mb-3 rounded-3 bg-warning-subtle">
-      <div className="row row-cols-3 p-2">
+      <div className="row row-cols-3 p-2 text-center">
         <div className="col">
           <p className="my-1">Wrong: {props.result.wrongAnswers}</p>
         </div>
