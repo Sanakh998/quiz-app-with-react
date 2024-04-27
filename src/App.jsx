@@ -10,16 +10,26 @@ function App() {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+  const [isCompleted, setIsCompleted] = useState(false);
   const [result, setResult] = useState({
     score: 0,
     correctAnswers: 0,
     wrongAnswers: 0,
   });
-  const [isCompleted, setIsCompleted] = useState(false);
 
   const { questions, topic, level, totalQuestions, scorePerQuestion } = quiz;
   const { question, options, correctAnswer } = questions[activeQuestion];
 
+  
+  const checkAnswer = (ans, index) => {
+    setSelectedAnswerIndex(index);
+    if (ans === correctAnswer) {
+      setSelectedAnswer(true);
+    } else {
+      setSelectedAnswer(false);
+    }
+  };
+  
   const handleNext = () => {
     setSelectedAnswerIndex(null);
     setActiveQuestion((prev) => prev + 1);
@@ -37,25 +47,6 @@ function App() {
     });
   };
 
-  const checkAnswer = (ans, index) => {
-    setSelectedAnswerIndex(index);
-    if (ans === correctAnswer) {
-      setSelectedAnswer(true);
-    } else {
-      setSelectedAnswer(false);
-    }
-  };
-
-  const restartTest = () => {
-    setActiveQuestion(0);
-    setResult({
-      score: 0,
-      correctAnswers: 0,
-      wrongAnswers: 0,
-    }),
-      setIsCompleted(false);
-    setSelectedAnswerIndex(null);
-  };
   const finishTest = () => {
     setIsCompleted(true);
     setResult((prev) => {
@@ -71,6 +62,18 @@ function App() {
           };
     });
   };
+
+  const restartTest = () => {
+    setActiveQuestion(0);
+    setResult({
+      score: 0,
+      correctAnswers: 0,
+      wrongAnswers: 0,
+    }),
+      setIsCompleted(false);
+    setSelectedAnswerIndex(null);
+  };
+  
   return (
     <div className="container d-flex flex-column">
       <Header
