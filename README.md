@@ -9,8 +9,14 @@ To run the app locally, follow these steps:
 
 - Clone this repository to your local machine.
 Navigate to the project directory.
-- Install dependencies using npm install or yarn install.
-- Start the development server with npm run dev.
+- Install dependencies using this:
+  ```bash
+  npm install
+  ```
+- Start the development server with
+  ``` bash
+  npm run dev
+  ```
 - Open your browser and go to http://localhost:5173 to view the app.
 
 ### Features
