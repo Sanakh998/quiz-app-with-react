@@ -6,7 +6,7 @@ import Questions from "./Questions";
 
 const Main = (props) => {
   return (
-    <div className="p-3 bg-dark-subtle rounded-3">
+    <div className="p-3 bg-dark-subtle rounded-3 shadow mb-2 mb-sm-3">
       <Questions
         activeQuestion={props.activeQuestion}
         question={props.question}

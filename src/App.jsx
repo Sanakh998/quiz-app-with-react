@@ -67,7 +67,7 @@ function App() {
   };
 
   return (
-    <div className="container d-flex flex-column">
+    <div className="container d-flex flex-column rounded-3">
       <Header />
       <ScoreBar result={result} />
       {isCompleted ? (

@@ -7,8 +7,8 @@ const Result = ({ result, restartTest }) => {
     <div
       className={
         result.correctAnswers > result.wrongAnswers
-          ? "bg-success text-center rounded-3"
-          : "bg-danger text-center rounded-3"
+          ? "bg-success text-center rounded-3 mb-2 mb-sm-3"
+          : "bg-danger text-center rounded-3 mb-2 mb-sm-3"
       }
     >
       <h2 className="bg-warning text-dark rounded-top-3 py-2">Result</h2>
@@ -28,7 +28,7 @@ const Result = ({ result, restartTest }) => {
           </p>
         </div>
       )}
-      <button className="btn btn-light my-2 px-5" onClick={restartTest}>
+      <button className="btn btn-light my-2 px-5 shadow-sm-inset" onClick={restartTest}>
         Start Test Again
       </button>
     </div>
