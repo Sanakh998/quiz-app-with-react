@@ -5,17 +5,19 @@ import Header from "./assets/Components/Header";
 import ScoreBar from "./assets/Components/ScoreBar";
 import Main from "./assets/Components/Main";
 import Result from "./assets/Components/Result";
+import StartPage from "./assets/Components/StartPage";
 
 function App() {
-  const [activeQuestion, setActiveQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [isStart, setIsStart] = useState(true);
+  const [activeQuestion, setActiveQuestion] = useState(0);
   const [result, setResult] = useState({
     score: 0,
     correctAnswers: 0,
     wrongAnswers: 0,
   });
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
 
   const { questions } = quiz;
   const { question, options, correctAnswer } = questions[activeQuestion];
@@ -65,26 +67,36 @@ function App() {
       setIsCompleted(false);
     setSelectedAnswerIndex(null);
   };
+  const onStart = () => {
+    setIsStart(false)
+  }
+
 
   return (
     <div className="container d-flex flex-column rounded-3">
-      <Header />
-      <ScoreBar result={result} />
-      {isCompleted ? (
-        <Result result={result} restartTest={restartTest} />
+      {isStart ? (
+        <StartPage onStart={onStart}/>
       ) : (
-        <Main
-          correctAnswer={correctAnswer}
-          selectedAnswer={selectedAnswer}
-          selectedAnswerIndex={selectedAnswerIndex}
-          options={options}
-          question={question}
-          questions={questions}
-          activeQuestion={activeQuestion}
-          finishTest={finishTest}
-          handleNext={handleNext}
-          checkAnswer={checkAnswer}
-        />
+        <div>
+          <Header />
+          <ScoreBar result={result} />
+          {isCompleted ? (
+            <Result result={result} restartTest={restartTest} />
+          ) : (
+            <Main
+              correctAnswer={correctAnswer}
+              selectedAnswer={selectedAnswer}
+              selectedAnswerIndex={selectedAnswerIndex}
+              options={options}
+              question={question}
+              questions={questions}
+              activeQuestion={activeQuestion}
+              finishTest={finishTest}
+              handleNext={handleNext}
+              checkAnswer={checkAnswer}
+            />
+          )}{" "}
+        </div>
       )}
     </div>
   );
