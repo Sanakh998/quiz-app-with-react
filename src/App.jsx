@@ -5,11 +5,9 @@ import Header from "./assets/Components/Header";
 import ScoreBar from "./assets/Components/ScoreBar";
 import Main from "./assets/Components/Main";
 import Result from "./assets/Components/Result";
-import StartPage from "./assets/Components/StartPage";
 
 function App() {
   const [isCompleted, setIsCompleted] = useState(false);
-  const [isStart, setIsStart] = useState(true);
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [result, setResult] = useState({
     score: 0,
@@ -67,36 +65,27 @@ function App() {
       setIsCompleted(false);
     setSelectedAnswerIndex(null);
   };
-  const onStart = () => {
-    setIsStart(false)
-  }
-
+ 
 
   return (
     <div className="container d-flex flex-column rounded-3">
-      {isStart ? (
-        <StartPage onStart={onStart}/>
+      <Header />
+      <ScoreBar result={result} />
+      {isCompleted ? (
+        <Result result={result} restartTest={restartTest} />
       ) : (
-        <div>
-          <Header />
-          <ScoreBar result={result} />
-          {isCompleted ? (
-            <Result result={result} restartTest={restartTest} />
-          ) : (
-            <Main
-              correctAnswer={correctAnswer}
-              selectedAnswer={selectedAnswer}
-              selectedAnswerIndex={selectedAnswerIndex}
-              options={options}
-              question={question}
-              questions={questions}
-              activeQuestion={activeQuestion}
-              finishTest={finishTest}
-              handleNext={handleNext}
-              checkAnswer={checkAnswer}
-            />
-          )}{" "}
-        </div>
+        <Main
+          correctAnswer={correctAnswer}
+          selectedAnswer={selectedAnswer}
+          selectedAnswerIndex={selectedAnswerIndex}
+          options={options}
+          question={question}
+          questions={questions}
+          activeQuestion={activeQuestion}
+          finishTest={finishTest}
+          handleNext={handleNext}
+          checkAnswer={checkAnswer}
+        />
       )}
     </div>
   );
